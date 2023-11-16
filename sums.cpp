@@ -1,30 +1,34 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-void solve(int dp[], int a[], int n, int s)
+void solve(bool dp[], int a[], int n, int s)
 {
-    memset(dp, 0, sizeof(dp));
-    dp[0] = 1;
+    memset(dp, false, sizeof(dp));
+    dp[0] = true;
+
     for(int i = 1; i <= n; i++)
     {
         for(int j = s; j >= a[i]; j--)
         {
-            if(dp[j-a[i]] == 1)
-                dp[j] = 1;
+            if(dp[j-a[i]] == true)
+            {
+                dp[j] = true;
+            }
         }
     }
     if(dp[s])
     {
         cout << "YES\n";
         int curSum = s;
-        for(int i = n; i > 0; i--)
+        for(int i = 1; i <= n; i++)
         {
-            if(curSum >= a[i] && dp[curSum-a[i]] == 1)
-                cout << i << " ";
+            if(dp[s-a[i]] && curSum >= a[i]){
                 curSum -= a[i];
+            cout << i << " ";
+            }
         }
     }
-    else
+    if(!dp[s])
         cout << "NO";
 }
 
@@ -38,7 +42,7 @@ int main()
     int n,s;
     cin >> n >> s;
     int a[n+5];
-    int dp[n+5];
+    bool dp[n+5];
     for (int i = 1; i <= n; i++)
         cin >> a[i];
 
