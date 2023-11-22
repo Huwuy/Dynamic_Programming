@@ -14,15 +14,6 @@ int solve(int n, int m, int w[], int v[])
         else
             dp[i][j] = dp[i-1][j];
     }
-/*    for(int i = 0; i <= n; i++)
-    {
-        for(int j = 0; j <= m; j++)
-        {
-            cout << dp[i][j] << " ";
-        }
-        cout << endl;
-    }
-*/
     cout << dp[n][m] << endl;
 }
 
@@ -41,15 +32,17 @@ void find_num(int n, int m, int w[]) {
         }
     }
     sort(v.begin(), v.end());
-    for(int i = 1; i < v.size(); i++)
-    {
-        int cnt = 1;
-        if(v[i] == v[i-1])
-        {
+    int cnt = 1;
+
+    for (int i = 1; i < v.size(); i++) {
+        if (v[i] == v[i - 1]) {
             cnt++;
+        } else {
+            cout << v[i - 1] << " " << cnt << endl;
+            cnt = 1;
         }
-        cout << v[i] << " " << cnt << endl;
     }
+    cout << v.back() << " " << cnt << endl;
 }
 
 int main()
